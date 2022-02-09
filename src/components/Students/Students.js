@@ -61,6 +61,13 @@ const Students = () => {
         .then((res) => {
           if (res.data.modifiedCount > 0) {
             alert("successfully changed");
+
+            let newData = [...students];
+            checkedId.forEach((data) => {
+              const filtered = newData.find((da) => da._id === data);
+              filtered.status = "active";
+            });
+            setStudents(newData);
           }
         });
   };
@@ -78,6 +85,12 @@ const Students = () => {
         .then((res) => {
           if (res.data.modifiedCount > 0) {
             alert("successfully changed");
+            let newData = [...students];
+            inActiveCheck.forEach((data) => {
+              const filtered = newData.find((da) => da._id === data);
+              filtered.status = "inActive";
+            });
+            setStudents(newData);
           }
         });
   };
