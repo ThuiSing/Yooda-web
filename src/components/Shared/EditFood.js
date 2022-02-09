@@ -9,25 +9,22 @@ const EditFood = () => {
   const { id } = useParams();
   const [food, setFood] = useState({});
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/food/${id}`)
+      .get(`https://damp-atoll-85391.herokuapp.com/food/${id}`)
       .then((res) => setFood(res.data));
   }, [id]);
   const onSubmit = (data) => {
     data.id = food._id;
     // console.log(data);
-    axios.put(`http://localhost:5000/food`, data).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        alert("successfully Changed Data ");
-      }
-    });
+    axios
+      .put(`https://damp-atoll-85391.herokuapp.com/food`, data)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          alert("successfully Changed Data ");
+        }
+      });
   };
   return (
     <div>

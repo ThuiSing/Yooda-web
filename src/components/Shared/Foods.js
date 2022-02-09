@@ -14,7 +14,7 @@ const Foods = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/foods?page=${selectedPage}&&showPages=${limit}`
+        `https://damp-atoll-85391.herokuapp.com/foods?page=${selectedPage}&&showPages=${limit}`
       )
       .then((res) => {
         setFoodItems(res.data.result);
@@ -28,13 +28,15 @@ const Foods = () => {
   const handleDelete = (id) => {
     const confirm = window.confirm("are you sure Delete?");
     confirm &&
-      axios.delete(`http://localhost:5000/foods/delete/${id}`).then((res) => {
-        if (res.data.deletedCount > 0) {
-          alert("successfully deleted");
-          const existed = foodItems.filter((res) => res._id !== id);
-          setFoodItems(existed);
-        }
-      });
+      axios
+        .delete(`https://damp-atoll-85391.herokuapp.com/foods/delete/${id}`)
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            alert("successfully deleted");
+            const existed = foodItems.filter((res) => res._id !== id);
+            setFoodItems(existed);
+          }
+        });
   };
 
   return (
@@ -102,12 +104,14 @@ function MyVerticallyCenteredModal(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    axios.post(`http://localhost:5000/foods`, data).then((res) => {
-      if (res.data.insertedId) {
-        alert("added Successfully");
-        reset();
-      }
-    });
+    axios
+      .post(`https://damp-atoll-85391.herokuapp.com/foods`, data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          alert("added Successfully");
+          reset();
+        }
+      });
   };
 
   return (

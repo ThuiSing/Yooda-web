@@ -9,7 +9,7 @@ const Served = () => {
 
   useEffect(() => {
     axios
-      .get(` http://localhost:5000/distribution`)
+      .get(` https://damp-atoll-85391.herokuapp.com/distribution`)
       .then((res) => setServedList(res.data));
   }, []);
 

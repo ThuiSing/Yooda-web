@@ -17,7 +17,7 @@ const Serve = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/students?page=${selectedPage}&&showPages=${limit}`
+        `https://damp-atoll-85391.herokuapp.com/students?page=${selectedPage}&&showPages=${limit}`
       )
       .then((res) => {
         setStudents(res.data.result);
@@ -37,16 +37,18 @@ const Serve = () => {
   };
   const handleSub = () => {
     if (inValue) {
-      axios.get(`http://localhost:5000/student/roll/${inValue}`).then((res) => {
-        if (res.data < 1) {
-          setMess("No students Found");
-          setNewStudents([]);
-        } else {
-          setMess("");
-          setNewStudents(res.data);
-        }
-        setShow(false);
-      });
+      axios
+        .get(`https://damp-atoll-85391.herokuapp.com/student/roll/${inValue}`)
+        .then((res) => {
+          if (res.data < 1) {
+            setMess("No students Found");
+            setNewStudents([]);
+          } else {
+            setMess("");
+            setNewStudents(res.data);
+          }
+          setShow(false);
+        });
     } else {
       setNewStudents(students);
       setShow(true);

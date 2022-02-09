@@ -19,7 +19,7 @@ const DistributionForm = (props) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/foods?page=${selectedPage}&&showPages=${limit}`
+        `https://damp-atoll-85391.herokuapp.com/foods?page=${selectedPage}&&showPages=${limit}`
       )
       .then((res) => {
         setFoodItems(res.data.result);
@@ -48,14 +48,16 @@ const DistributionForm = (props) => {
 
     // console.log(selectedFood);
     // console.log(data);
-    axios.post(`http://localhost:5000/distribution`, data).then((res) => {
-      if (res.data.insertedId) {
-        alert("successfully served");
-        setMessage("");
-      } else if (res.data.message) {
-        setMessage(res.data.message);
-      }
-    });
+    axios
+      .post(`https://damp-atoll-85391.herokuapp.com/distribution`, data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          alert("successfully served");
+          setMessage("");
+        } else if (res.data.message) {
+          setMessage(res.data.message);
+        }
+      });
   };
 
   return (

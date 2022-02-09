@@ -9,26 +9,23 @@ const EditStudent = () => {
   const { id } = useParams();
   const [student, setStudent] = useState({});
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/students/${id}`)
+      .get(`https://damp-atoll-85391.herokuapp.com/students/${id}`)
       .then((res) => setStudent(res.data));
   }, [id]);
   const onSubmit = (data) => {
     data.id = student._id;
     // console.log(data);
-    axios.put(`http://localhost:5000/student`, data).then((res) => {
-      //   console.log(res);
-      if (res.data.modifiedCount > 0) {
-        alert("successfully Changed Data ");
-      }
-    });
+    axios
+      .put(`https://damp-atoll-85391.herokuapp.com/student`, data)
+      .then((res) => {
+        //   console.log(res);
+        if (res.data.modifiedCount > 0) {
+          alert("successfully Changed Data ");
+        }
+      });
   };
   return (
     <div>

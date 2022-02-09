@@ -18,7 +18,7 @@ const Students = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/students?page=${selectedPage}&&showPages=${limit}`
+        `https://damp-atoll-85391.herokuapp.com/students?page=${selectedPage}&&showPages=${limit}`
       )
       .then((res) => {
         setStudents(res.data.result);
@@ -56,11 +56,13 @@ const Students = () => {
       "are you sure to update this selected items ?"
     );
     confirm &&
-      axios.put(`http://localhost:5000/students`, checkedId).then((res) => {
-        if (res.data.modifiedCount > 0) {
-          alert("successfully changed");
-        }
-      });
+      axios
+        .put(`https://damp-atoll-85391.herokuapp.com/students`, checkedId)
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            alert("successfully changed");
+          }
+        });
   };
   const handleInactive = () => {
     const confirm = window.confirm(
@@ -69,7 +71,10 @@ const Students = () => {
     // console.log(inActiveCheck);
     confirm &&
       axios
-        .put(`http://localhost:5000/students/inactive`, inActiveCheck)
+        .put(
+          `https://damp-atoll-85391.herokuapp.com/students/inactive`,
+          inActiveCheck
+        )
         .then((res) => {
           if (res.data.modifiedCount > 0) {
             alert("successfully changed");
@@ -80,13 +85,15 @@ const Students = () => {
   const handleDelete = (id) => {
     const confirm = window.confirm("are you sure Delete?");
     confirm &&
-      axios.delete(`http://localhost:5000/students/${id}`).then((res) => {
-        if (res.data.deletedCount > 0) {
-          alert("successfully deleted");
-          const existed = students.filter((res) => res._id !== id);
-          setStudents(existed);
-        }
-      });
+      axios
+        .delete(`https://damp-atoll-85391.herokuapp.com/students/${id}`)
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            alert("successfully deleted");
+            const existed = students.filter((res) => res._id !== id);
+            setStudents(existed);
+          }
+        });
   };
   return (
     <div>
@@ -198,12 +205,14 @@ function MyVerticallyCenteredModal(props) {
   } = useForm();
   const onSubmit = (data) => {
     data.status = "inActive";
-    axios.post(`http://localhost:5000/students`, data).then((res) => {
-      if (res.data.insertedId) {
-        alert("added Successfully");
-        reset();
-      }
-    });
+    axios
+      .post(`https://damp-atoll-85391.herokuapp.com/students`, data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          alert("added Successfully");
+          reset();
+        }
+      });
   };
 
   return (
